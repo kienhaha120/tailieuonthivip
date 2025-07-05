@@ -1,45 +1,22 @@
 
-function createMember() {
+function getMembers() {
+  return JSON.parse(localStorage.getItem("members") || "[]");
+}
+
+function setMembers(members) {
+  localStorage.setItem("members", JSON.stringify(members));
+}
+
+function addMember() {
   const email = document.getElementById("newEmail").value.trim();
   const password = document.getElementById("newPass").value.trim();
   if (!email || !password) return alert("Vui lòng nhập đủ thông tin");
-
-  let members = JSON.parse(localStorage.getItem("members") || "[]");
+  const members = getMembers();
   members.push({ email, password });
-  localStorage.setItem("members", JSON.stringify(members));
-  showMembers();
-}
-
-function showMembers() {
-  const members = JSON.parse(localStorage.getItem("members") || "[]");
-  const tbody = document.querySelector("#memberTable tbody");
-  tbody.innerHTML = "";
-  members.forEach(m => {
-    tbody.innerHTML += `<tr><td>${m.email}</td><td>${m.password}</td></tr>`;
-  });
-}
-
-function uploadFile(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const uploaded = JSON.parse(localStorage.getItem("uploadedFiles") || "[]");
-    uploaded.push({ name: file.name, content: e.target.result });
-    localStorage.setItem("uploadedFiles", JSON.stringify(uploaded));
-    showFiles();
-  };
-  reader.readAsDataURL(file);
-}
-
-function showFiles() {
-  const files = JSON.parse(localStorage.getItem("uploadedFiles") || "[]");
-  const list = document.getElementById("fileList");
-  list.innerHTML = "";
-  files.forEach(f => {
-    list.innerHTML += `<li><a href="${f.content}" download="${f.name}">${f.name}</a></li>`;
-  });
+  setMembers(members);
+  alert("✔️ Tạo tài khoản thành công!");
+  document.getElementById("newEmail").value = "";
+  document.getElementById("newPass").value = "";
 }
 
 function logout() {
@@ -47,5 +24,29 @@ function logout() {
   window.location.href = "index.html";
 }
 
-showMembers();
-showFiles();
+// Upload file
+document.getElementById("fileInput").addEventListener("change", function (e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function (evt) {
+    const files = JSON.parse(localStorage.getItem("uploadedFiles") || "[]");
+    files.push({ name: file.name, content: evt.target.result });
+    localStorage.setItem("uploadedFiles", JSON.stringify(files));
+    displayFiles();
+  };
+  reader.readAsDataURL(file);
+});
+
+function displayFiles() {
+  const files = JSON.parse(localStorage.getItem("uploadedFiles") || "[]");
+  const ul = document.getElementById("fileList");
+  ul.innerHTML = "";
+  files.forEach(f => {
+    const li = document.createElement("li");
+    li.innerHTML = `<a href="${f.content}" download="${f.name}">${f.name}</a>`;
+    ul.appendChild(li);
+  });
+}
+
+displayFiles();

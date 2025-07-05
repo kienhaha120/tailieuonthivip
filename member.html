@@ -1,34 +1,17 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Thành viên</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    .file-box { max-width: 700px; margin: auto; background: white; padding: 30px; border-radius: 10px; }
-    ul li { margin: 8px 0; }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="file-box">
+  <div class="login-box">
     <h2>📘 Tài liệu luyện tập</h2>
     <ul id="fileList"></ul>
-    <button onclick="logout()">Đăng xuất</button>
+    <button onclick="logout()">🚪 Đăng xuất</button>
   </div>
-  <script>
-    function loadFiles() {
-      const files = JSON.parse(localStorage.getItem("uploadedFiles") || "[]");
-      const list = document.getElementById("fileList");
-      list.innerHTML = "";
-      files.forEach(f => {
-        list.innerHTML += `<li><a href="${f.content}" download="${f.name}">${f.name}</a></li>`;
-      });
-    }
-    function logout() {
-      localStorage.removeItem("role");
-      window.location.href = "index.html";
-    }
-    loadFiles();
-  </script>
+  <script src="member.js"></script>
 </body>
 </html>
