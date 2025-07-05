@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .admin-box { max-width: 700px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    input, button { margin: 10px 0; width: 100%; padding: 10px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    td, th { padding: 10px; border-bottom: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <div class="admin-box">
+    <h2>👑 Quản trị hệ thống</h2>
+    <h3>Tạo tài khoản thành viên</h3>
+    <input id="newEmail" placeholder="Email thành viên" />
+    <input id="newPass" placeholder="Mật khẩu" />
+    <button onclick="createMember()">Tạo tài khoản</button>
+    <h3>Danh sách tài khoản</h3>
+    <table id="memberTable"><thead><tr><th>Email</th><th>Mật khẩu</th></tr></thead><tbody></tbody></table>
+    <hr/>
+    <h3>Tải đề lên</h3>
+    <input type="file" onchange="uploadFile(event)" />
+    <ul id="fileList"></ul>
+    <button onclick="logout()">Đăng xuất</button>
+  </div>
+  <script src="admin.js"></script>
+</body>
+</html>
