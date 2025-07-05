@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Quản lý hệ thống - Admin</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="admin-container">
+    <h2>👑 Quản trị viên</h2>
+
+    <h3>➕ Thêm tài khoản thành viên</h3>
+    <input type="email" id="newEmail" placeholder="Email thành viên" />
+    <input type="password" id="newPass" placeholder="Mật khẩu thành viên" />
+    <button onclick="addMember()">Thêm thành viên</button>
+
+    <hr>
+
+    <h3>📤 Tải đề luyện tập</h3>
+    <select id="classSelect">
+      <option value="">Chọn lớp</option>
+      <option value="10">Lớp 10</option>
+      <option value="11">Lớp 11</option>
+      <option value="12">Lớp 12</option>
+    </select>
+    <select id="subjectSelect">
+      <option value="">Chọn môn</option>
+      <option value="Toán">Toán</option>
+      <option value="Lý">Lý</option>
+      <option value="Hóa">Hóa</option>
+      <option value="Sinh">Sinh</option>
+    </select>
+    <input type="file" id="fileInput" />
+    <button onclick="uploadFile()">Tải đề</button>
+
+    <ul id="fileList"></ul>
+
+    <hr>
+    <button onclick="logout()" class="logout-btn">Đăng xuất</button>
+  </div>
+  <script src="admin.js"></script>
+</body>
+</html>
